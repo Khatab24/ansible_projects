@@ -1,0 +1,12 @@
+---
+- name: loops demo play
+  hosts : ubuntu_server
+  gather_facts: no 
+  tasks:
+    - name: loop over all the software
+      debug:
+        msg: "this is software :{{ item }}"
+      loop:
+        - wget
+        - apache
+        - telnet

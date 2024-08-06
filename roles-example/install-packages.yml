@@ -1,0 +1,8 @@
+---
+- name: install all required packages
+  hosts : 172.26.209.217
+  gather_facts: no
+  roles:
+    - install-git
+    - install-httpd
+    - install-telnet

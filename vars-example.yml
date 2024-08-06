@@ -1,0 +1,10 @@
+---
+- name: varible example
+  hosts: 172.26.209.217
+  gather_facts: no
+  vars:
+    http_port: 80
+  tasks:
+    - name: show variable value
+      debug:
+        msg: "{{ http_port }}"  

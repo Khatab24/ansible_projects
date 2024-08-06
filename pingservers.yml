@@ -1,0 +1,7 @@
+---
+- name: ping ubuntu servers
+  hosts: ubuntu_server
+  gather_facts: yes
+  tasks:
+    - name: ping ubuntu server now !
+      ping:  

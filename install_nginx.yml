@@ -1,0 +1,32 @@
+---
+- name: Install and configure Nginx on Ubuntu
+  hosts: 172.26.209.217
+  become: yes
+  vars:
+    nginx_conf_src: "JewelWebsite/index.html"
+    nginx_conf_dest: "/etc/nginx/nginx.conf"  
+  tasks:
+    
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Deploy Nginx configuration
+      template:
+        src: "{{ nginx_conf_src }}"
+        dest: "{{ nginx_conf_dest }}"
+      notify:
+        - Reload Nginx
+
+    - name: Ensure Nginx is running
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: Reload Nginx
+      systemd:
+        name: nginx
+        state: reloaded

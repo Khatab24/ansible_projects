@@ -1,0 +1,23 @@
+---
+- name: install apache playbook
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: install apche http server
+      package:
+        name: apache2
+        state: present
+      register: install_apache
+
+
+    - name: send email
+      mail:
+        host: smtp.gmail.com
+        port: 465
+        username: khatabahmed245@gmail.com
+        password: Khatab24452001#
+        from: khatabahmed245@gmail.com
+        to: ahmedsaad1911200@gmail.com
+        subject: "{{ ansible_play_name }} has completed"
+        body: "here are the results {{install_apache}}"
+        secure: starttls
